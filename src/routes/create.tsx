@@ -9,10 +9,11 @@ const Layout: FC = (props) => (
   <html>
     <head>
       <script src="https://unpkg.com/htmx.org@1.9.8" integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr" crossorigin="anonymous"></script>
+      <link href='styles.css' rel='stylesheet' />
       <title> HI </title>
     </head>
     <body>
-      <main>
+      <main class='bg-black'>
         {props.children}
       </main>
     </body>
@@ -23,7 +24,7 @@ create.get('/', (c) => {
   return c.html(
     <Layout>
       <h1> Create Post</h1>
-      <form hx-post="/create" hx-encoding='multipart/form-data'>
+      <form hx-post="/create" hx-encoding='multipart/form-data' class='bg-red-50'>
         <label for='title'> Title </label>
         <input type='text' name='title' placeholder='Title' />
         <br />
