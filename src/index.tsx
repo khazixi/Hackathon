@@ -3,6 +3,7 @@ import { db } from './db'
 import { Post, post } from './schema'
 import { FC } from 'hono/jsx'
 import { create } from './routes/create'
+import { content } from './routes/content'
 
 const app = new Hono()
 
@@ -40,6 +41,8 @@ app.get('/', async (c) => {
 })
 
 app.route('/create', create)
+
+app.route('/content', content)
 
 // TODO: Replace with an HX-BOOST?
 
