@@ -10,5 +10,3 @@ await (
     migrate(db, { migrationsFolder: './drizzle' })
   }
 )()
-
-console.log('finished')

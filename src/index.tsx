@@ -44,7 +44,7 @@ app.get('/create', (c) => {
   return c.html(
     <Layout>
       <h1> Create Post</h1>
-      <form hx-post="/create">
+      <form hx-post="/create" hx-encoding='multipart/form-data'>
         <label for='title'> Title </label>
         <input type='text' name='title' placeholder='Title' />
         <br />
@@ -84,7 +84,13 @@ app.post('/create', async (c) => {
   const data = await c.req.parseBody()
   const date = new Date()
 
-  console.log(data)
+  let image
+  if (data['image'] && typeof data['image'] == 'object') {
+    const temp = data['image'] as Blob
+    image = Buffer.from(await temp.arrayBuffer())
+  } else {
+    image = null
+  }
 
   await db
   .insert(post)
@@ -96,6 +102,7 @@ app.post('/create', async (c) => {
     author: data['author'] as string,
     city: data['city'] as string,
     state: data['state'] as string,
+    image: image,
   })
 
   return c.text(
