@@ -1,0 +1,8 @@
+{
+  title: "hi",
+  image: "[object File]",
+  description: "hi",
+  author: "hi",
+  city: "hi",
+  state: "hi"
+}

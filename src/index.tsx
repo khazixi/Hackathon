@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { db } from './db'
 import { Post, post } from './schema'
 import { FC } from 'hono/jsx'
+import { type } from 'os'
 
 const app = new Hono()
 
@@ -53,7 +54,7 @@ app.get('/create', (c) => {
         <br />
 
         <label> Category </label>
-        <input type='text' name='title' placeholder='Category' />
+        <input type='text' name='category' placeholder='Category' />
         <br />
 
         <label> Description </label>
@@ -81,18 +82,22 @@ app.get('/create', (c) => {
 // TODO: Add Validation Logic?
 app.post('/create', async (c) => {
   const data = await c.req.parseBody()
-  const image = data['image'] ? await (data['image'] as File).arrayBuffer() : null
+  const date = new Date()
 
-  db.insert(post).values({
-    date: data['date'] as string,
+  console.log(data)
+
+  await db
+  .insert(post)
+  .values({
+    date: date.toISOString(),
     title: data['title'] as string,
     category: data['category'] as string,
-    author: data['author'] as string,
     description: data['description'] as string,
+    author: data['author'] as string,
     city: data['city'] as string,
     state: data['state'] as string,
-    image: image ? Buffer.from(image) : null
   })
+
   return c.text(
     JSON.stringify('Thanks')
   )

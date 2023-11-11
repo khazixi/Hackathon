@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "dev": "bun run --hot src/index.tsx"
+    "dev": "bun run --hot src/index.tsx",
+    "generate": "bun drizzle-kit generate:sqlite"
   },
   "dependencies": {
+    "drizzle-kit": "^0.20.1",
     "drizzle-orm": "^0.29.0",
     "hono": "^3.9.2"
   },
