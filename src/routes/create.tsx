@@ -17,7 +17,7 @@ create.get('/', (c) => {
           <input class='border solid border-gray-300 p-1' type='text' name='title' placeholder='Title' />
         </div>
 
-        <label> Image </label>
+        <label> Image (Warning Do not use) </label>
         <input class='border solid border-gray-300 py-2 ' type='file' accept='image/png, image/jpeg, image/gif' name='image' />
 
         <div>
@@ -63,13 +63,13 @@ create.post('/', async (c) => {
     )
   }
 
-  let image
-  if (data['image'] && typeof data['image'] == 'object') {
-    const temp = data['image'] as Blob
-    image = Buffer.from(await temp.arrayBuffer())
-  } else {
-    image = null
-  }
+  // let image
+  // if (data['image'] && typeof data['image'] == 'object') {
+  //   const temp = data['image'] as Blob
+  //   image = Buffer.from(await temp.arrayBuffer())
+  // } else {
+  //   image = null
+  // }
 
   await db.insert(post)
     .values({
@@ -80,7 +80,7 @@ create.post('/', async (c) => {
       author: session.user.username,
       city: data['city'] as string,
       state: data['state'] as string,
-      image: image,
+      image: data['image'],
     })
 
   return c.html(

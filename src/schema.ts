@@ -10,7 +10,7 @@ export const post = sqliteTable('post', {
   author: text('author').notNull(),
   city: text('city').notNull(),
   state: text('state').notNull(),
-  image: blob('image', { mode: 'buffer' })
+  image: blob('image')
 })
 
 
