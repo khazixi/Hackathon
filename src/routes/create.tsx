@@ -8,37 +8,44 @@ export const create = new Hono()
 create.get('/', (c) => {
   return c.html(
     <Layout>
-      <h1> Create Post</h1>
-      <form hx-post="/create" hx-encoding='multipart/form-data' class='bg-red-50'>
-        <label for='title'> Title </label>
-        <input type='text' name='title' placeholder='Title' />
-        <br />
+      <form hx-post="/create" hx-encoding='multipart/form-data' class='bg-white flex flex-col m-4 rounded py-4 px-16 gap-4'>
+        <h1 class='text-center text-4xl col-span-2'> Create Post</h1>
+
+        <div class=''>
+          <label for='title' class='bg-gray-300 py-2 px-1'> Title </label>
+          <input class='border solid border-gray-300 p-1' type='text' name='title' placeholder='Title' />
+        </div>
 
         <label> Image </label>
-        <input type='file' accept='image/png, image/jpeg, image/gif' name='image' />
-        <br />
+        <input class='border solid border-gray-300 py-2 ' type='file' accept='image/png, image/jpeg, image/gif' name='image' />
 
-        <label> Category </label>
-        <input type='text' name='category' placeholder='Category' />
-        <br />
+        <div>
+          <label class='bg-gray-300 py-2 px-1'> Category </label>
+          <input class='border solid border-gray-300 p-1' type='text' name='category' placeholder='Category' />
+        </div>
 
         <label> Description </label>
-        <input type='text' name='description' placeholder='Description' />
-        <br />
+        <textarea placeholder='Description' name='description' class='border solid border-black '>
 
-        <label> Author </label>
-        <input type='text' name='author' placeholder='Author' />
-        <br />
+        </textarea>
 
-        <label> City </label>
-        <input type='text' name='city' placeholder='City' />
-        <br />
+        <div>
+          <label class='bg-gray-300 py-2 px-1'> Author </label>
+          <input class='border solid border-gray-300 p-1' type='text' name='author' placeholder='Author' />
+        </div>
 
-        <label> State </label>
-        <input type='text' name='state' placeholder='State' />
-        <br />
+        <div>
+          <label class='bg-gray-300 py-2 px-1'> City </label>
+          <input class='border solid border-gray-300 p-1' type='text' name='city' placeholder='City' />
+        </div>
 
-        <button type='submit'> Submit </button>
+        <div>
+          <label class='bg-gray-300 py-2 px-1'> State </label>
+          <input class='border solid border-gray-300 p-1' type='text' name='state' placeholder='State' />
+        </div>
+
+        <button type='submit' class='p-4 border border-gray-200 w-32 self-center'> Submit </button>
+        <a href='/'> Back </a>
       </form>
     </Layout>
   )
@@ -58,19 +65,19 @@ create.post('/', async (c) => {
   }
 
   await db
-  .insert(post)
-  .values({
-    date: date.toISOString(),
-    title: data['title'] as string,
-    category: data['category'] as string,
-    description: data['description'] as string,
-    author: data['author'] as string,
-    city: data['city'] as string,
-    state: data['state'] as string,
-    image: image,
-  })
+    .insert(post)
+    .values({
+      date: date.toISOString(),
+      title: data['title'] as string,
+      category: data['category'] as string,
+      description: data['description'] as string,
+      author: data['author'] as string,
+      city: data['city'] as string,
+      state: data['state'] as string,
+      image: image,
+    })
 
-  return c.text(
-    JSON.stringify('Thanks')
+  return c.html(
+    <a href='/'> Back </a>
   )
 })
