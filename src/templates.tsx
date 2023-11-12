@@ -39,7 +39,7 @@ export const ManagePreview = (props: Post) => (
     <p> {props.description} </p>
 
     <button hx-get={`/editor/${props.id}`} hx-swap="outerHTML"> Edit </button>
-    <button hx-delete={`/editor/${props.id}`}> Delete </button>
+    <button hx-delete={`/editor/${props.id}`} hx-swap="outerHTML"> Delete </button>
   </div>
 );
 

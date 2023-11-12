@@ -58,3 +58,13 @@ editor.patch('/:id', async c => {
 
   return c.html(ManagePreview(poste[0]))
 })
+
+editor.delete('/:id', async c => {
+  const id = parseInt(c.req.param('id'))
+  const res = await db.delete(post)
+    .where(eq(post.id, id))
+  if (res)
+    return c.html("Delted Successfully")
+  else
+    return c.html("Fuck")
+})
