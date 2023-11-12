@@ -41,6 +41,14 @@ export const PostContent = (props: Post) => (
     <h1>{props.title}</h1>
     <p>{`By ${props.author}: ${props.city}, ${props.state}`}</p>
     <p>{props.description}</p>
-    {props.image && <img src={"data:image/png;base64," + toBase64(props.image)} alt={`${props.title} Image`} />}
+    {props.image && <img src={"data:image/png;base64," + toBase64(props.image)} class='slide-it' alt={`${props.title} Image`} />}
   </div>
+);
+
+export const Navbar = () => (
+  <nav class='mb-2'>
+    <ul class='list-none'>
+      <li class='ml-auto bg-white p-2 mr-2 rounded-sm w-20 text-center'> Sign In </li>
+    </ul>
+  </nav>
 );

@@ -1,6 +1,6 @@
 @keyframes expand-height {
-    from { height: 100%; }
-    to { height: 300%; } /* Adjust this value as needed */
+    from { height: 0%; width: 100% }
+    to { height: 100%; width: 100% } /* Adjust this value as needed */
   }
 
 .slide-it {
