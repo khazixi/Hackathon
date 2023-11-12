@@ -16,12 +16,31 @@ export const Layout: FC = (props) => (
       </main>
     </body>
   </html>
-)
+);
 
 export const Preview = (props: Post) => (
-  <div class='bg-white text-black p-4 m-4 rounded-lg' hx-get={`/content/${props.id}`}>
+  <div class='bg-white text-black p-4 m-4 rounded-lg min-w-[384px]'
+    hx-get={`/content/${props.id}`}
+    hx-swap="outerHTML"
+    hx-target="this"
+  >
     <h2 class='text-2xl'> {props.title} </h2>
     <h3 class='text-lg text-gray-300'> By {props.author} </h3>
     <p> {props.description} </p>
   </div>
-)
+);
+
+const toBase64 = (buf: Buffer) => btoa(buf.reduce((data: string, byte: number) => data + String.fromCharCode(byte), ""));
+
+export const PostContent = (props: Post) => (
+  <div class='bg-white text-black p-4 m-4 rounded-lg min-w-[384px]'
+    hx-get={`/preview/${props.id}`}
+    hx-swap="outerHTML"
+    hx-target="this"
+  >
+    <h1>{props.title}</h1>
+    <p>{`By ${props.author}: ${props.city}, ${props.state}`}</p>
+    <p>{props.description}</p>
+    {props.image && <img src={"data:image/png;base64," + toBase64(props.image)} alt={`${props.title} Image`} />}
+  </div>
+);
