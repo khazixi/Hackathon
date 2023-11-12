@@ -8,7 +8,7 @@ import { content } from './routes/content'
 
 const app = new Hono()
 
-app.use('/static/*', serveStatic({ root: './' }))
+app.get('/static/*', serveStatic({ root: './src' }))
 app.route('/create', create)
 app.route('/content', content)
 
@@ -16,15 +16,15 @@ const Layout: FC = (props) => (
   <html>
     <head>
       {/*
-      <link href='styles.css' rel='stylesheet' />
+      <script src="https://cdn.tailwindcss.com"></script>
       */}
       <title> HI </title>
       <script src="https://unpkg.com/htmx.org@1.9.8" integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr" crossorigin="anonymous"></script>
-      <script src="https://cdn.tailwindcss.com"></script>
+      <link href='/static/styles.css' rel='stylesheet' />
 
     </head>
-    <body>
-      <main class='h-screen bg-[#2A2727]'>
+    <body class='bg-[#2A2727]'>
+      <main>
         {props.children}
       </main>
     </body>
@@ -33,9 +33,9 @@ const Layout: FC = (props) => (
 
 // TODO: Find out how to work with blobs and images
 const preview = (props: Post) => (
-  <div>
-    <h2> {props.title} </h2>
-    <h3> By {props.author} </h3>
+  <div class='bg-white text-black p-4 m-4 rounded-lg'>
+    <h2 class='text-2xl'> {props.title} </h2>
+    <h3 class='text-lg text-gray-300'> By {props.author} </h3>
     <p> {props.description} </p>
   </div>
 )
@@ -44,9 +44,11 @@ app.get('/', async (c) => {
   const posts = await db.select().from(post)
   return c.html(
     <Layout>
-      <h1 class='text-lg'> News </h1>
+      <h1 class='text-4xl text-white font-bold text-center'> News </h1>
       {posts.map(v => preview(v))}
+      <p class='text-purple-50'> why</p>
     </Layout>
+
   )
 })
 
