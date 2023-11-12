@@ -30,6 +30,60 @@ export const Preview = (props: Post) => (
   </div>
 );
 
+export const ManagePreview = (props: Post) => (
+  <div class='bg-white text-black p-4 m-4 rounded-lg min-w-[384px]'
+    hx-target="this"
+  >
+    <h2 class='text-2xl'> {props.title} </h2>
+    <h3 class='text-lg text-gray-300'> By {props.author} </h3>
+    <p> {props.description} </p>
+
+    <button hx-get={`/editor/${props.id}`} hx-swap="outerHTML"> Edit </button>
+    <button hx-delete={`/editor/${props.id}`}> Delete </button>
+  </div>
+);
+
+export const EditorPreview = (props: Post) => (
+  <form class='bg-white text-black p-4 m-4 rounded-lg min-w-[384px]'
+    hx-patch={`/editor/${props.id}`}
+    hx-target="this"
+    hx-swap="outerHTML"
+  >
+    <div class=''>
+      <label for='title' class='bg-gray-300 py-2 px-1'> Title </label>
+      <input class='border solid border-gray-300 p-1' type='text' name='title' placeholder='Title' />
+    </div>
+
+    <label> Image </label>
+    <br/>
+    <input class='border solid border-gray-300 py-2 ' type='file' accept='image/png, image/jpeg, image/gif' name='image' />
+
+    <div>
+      <label class='bg-gray-300 py-2 px-1'> Category </label>
+      <input class='border solid border-gray-300 p-1' type='text' name='category' placeholder='Category' />
+    </div>
+
+    <label> Description </label>
+    <br/>
+    <textarea placeholder='Description' name='description' class='border solid border-black '>
+
+    </textarea>
+
+    <div>
+      <label class='bg-gray-300 py-2 px-1'> City </label>
+      <input class='border solid border-gray-300 p-1' type='text' name='city' placeholder='City' />
+    </div>
+
+    <div>
+      <label class='bg-gray-300 py-2 px-1'> State </label>
+      <input class='border solid border-gray-300 p-1' type='text' name='state' placeholder='State' />
+    </div>
+
+    <button type='submit'> Save </button>
+    <button hx-get={`/editor/original/${props.id}`}> Cancel </button>
+  </form>
+);
+
 const toBase64 = (buf: Buffer) => btoa(buf.reduce((data: string, byte: number) => data + String.fromCharCode(byte), ""));
 
 export const PostContent = (props: Post) => (
@@ -55,10 +109,6 @@ export const Navbar = () => (
     </a>
   </nav>
 );
-
-type ErrorLoginProps = {
-  reason: string
-}
 
 export const ErrorLogin = (prop: string) => (
   <div class='bg-red-300'>

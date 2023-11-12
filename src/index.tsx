@@ -8,6 +8,7 @@ import { content } from './routes/content'
 import { preview } from './routes/preview'
 import { signup } from './routes/signup'
 import { login } from './routes/login'
+import { editor } from './routes/editor'
 
 const app = new Hono()
 
@@ -17,6 +18,7 @@ app.route('/content', content)
 app.route('/preview', preview)
 app.route('/signup', signup)
 app.route('/login', login)
+app.route('/editor', editor)
 
 app.onError((err, c) => {
   console.error(`${err}`)

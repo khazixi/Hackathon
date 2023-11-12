@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { db } from '../db'
 import { post } from '../schema'
 import { Layout } from '../templates'
+import { auth } from '../lucia'
 
 export const create = new Hono()
 
@@ -30,11 +31,6 @@ create.get('/', (c) => {
         </textarea>
 
         <div>
-          <label class='bg-gray-300 py-2 px-1'> Author </label>
-          <input class='border solid border-gray-300 p-1' type='text' name='author' placeholder='Author' />
-        </div>
-
-        <div>
           <label class='bg-gray-300 py-2 px-1'> City </label>
           <input class='border solid border-gray-300 p-1' type='text' name='city' placeholder='City' />
         </div>
@@ -56,6 +52,17 @@ create.post('/', async (c) => {
   const data = await c.req.parseBody()
   const date = new Date()
 
+  const authRequest = auth.handleRequest(c)
+  const session = await authRequest.validate()
+
+  if (!session) {
+    return c.html(
+      <div class='bg-red-300'>
+        <h1 class='text-3xl text-red-900'> You Must Be logged In to Post!</h1>
+      </div>
+    )
+  }
+
   let image
   if (data['image'] && typeof data['image'] == 'object') {
     const temp = data['image'] as Blob
@@ -71,7 +78,7 @@ create.post('/', async (c) => {
       title: data['title'] as string,
       category: data['category'] as string,
       description: data['description'] as string,
-      author: data['author'] as string,
+      author: session.user.username,
       city: data['city'] as string,
       state: data['state'] as string,
       image: image,
