@@ -538,6 +538,30 @@ video {
   margin: 1rem;
 }
 
+.flex {
+  display: flex;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.flex-shrink {
+  flex-shrink: 1;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 .rounded-lg {
   border-radius: 0.5rem;
 }

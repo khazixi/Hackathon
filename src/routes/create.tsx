@@ -1,24 +1,9 @@
 import { Hono } from 'hono'
 import { db } from '../db'
 import { post } from '../schema'
-import { FC } from 'hono/jsx'
+import { Layout } from '../templates'
 
 export const create = new Hono()
-
-const Layout: FC = (props) => (
-  <html>
-    <head>
-      <script src="https://unpkg.com/htmx.org@1.9.8" integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr" crossorigin="anonymous"></script>
-      <link href='styles.css' rel='stylesheet' />
-      <title> HI </title>
-    </head>
-    <body>
-      <main class='bg-black'>
-        {props.children}
-      </main>
-    </body>
-  </html>
-)
 
 create.get('/', (c) => {
   return c.html(
