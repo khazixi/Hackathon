@@ -71,8 +71,7 @@ create.post('/', async (c) => {
     image = null
   }
 
-  await db
-    .insert(post)
+  await db.insert(post)
     .values({
       date: date.toISOString(),
       title: data['title'] as string,

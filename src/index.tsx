@@ -9,6 +9,7 @@ import { preview } from './routes/preview'
 import { signup } from './routes/signup'
 import { login } from './routes/login'
 import { editor } from './routes/editor'
+import { logout } from './routes/logout'
 
 const app = new Hono()
 
@@ -19,6 +20,7 @@ app.route('/preview', preview)
 app.route('/signup', signup)
 app.route('/login', login)
 app.route('/editor', editor)
+app.route('/logout', logout)
 
 app.onError((err, c) => {
   console.error(`${err}`)
@@ -26,7 +28,10 @@ app.onError((err, c) => {
 })
 
 app.get('/', async (c) => {
-  const posts = await db.select().from(post)
+  const posts = await db
+  .select()
+  .from(post)
+
   return c.html(
     <Layout>
       <Navbar />

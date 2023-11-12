@@ -19,14 +19,21 @@ export const Layout: FC = (props) => (
 );
 
 export const Preview = (props: Post) => (
-  <div class='bg-white text-black p-4 m-4 rounded-lg min-w-[384px]'
+  <div class='bg-white text-black m-4 rounded-lg min-w-[384px] flex flex-row'
     hx-get={`/content/${props.id}`}
     hx-swap="outerHTML"
     hx-target="this"
   >
-    <h2 class='text-2xl'> {props.title} </h2>
-    <h3 class='text-lg text-gray-300'> By {props.author} </h3>
-    <p> {props.description} </p>
+    {props.image ?
+      <img
+        class='h-max w-fit'
+        src={"data:image/png;base64," + toBase64(props.image)}/>
+      : ""}
+    <div class='p-2'>
+      <h2 class='text-2xl'> {props.title} </h2>
+      <h3 class='text-lg text-gray-300'> By {props.author} </h3>
+      <p> {props.description} </p>
+    </div>
   </div>
 );
 
@@ -55,7 +62,7 @@ export const EditorPreview = (props: Post) => (
     </div>
 
     <label> Image </label>
-    <br/>
+    <br />
     <input class='border solid border-gray-300 py-2 ' type='file' accept='image/png, image/jpeg, image/gif' name='image' />
 
     <div>
@@ -64,7 +71,7 @@ export const EditorPreview = (props: Post) => (
     </div>
 
     <label> Description </label>
-    <br/>
+    <br />
     <textarea placeholder='Description' name='description' class='border solid border-black '>
 
     </textarea>
@@ -107,6 +114,12 @@ export const Navbar = () => (
     <a href='/signup' class='bg-white p-2 mr-2 rounded-sm w-20 text-center'>
       Sign In
     </a>
+
+    <a href='/editor' class='bg-white p-2 mr-2 rounded-sm w-20 text-center'>
+      Editor
+    </a>
+
+    <button hx-get="/logout" hx-swap="none" class='text-white bg-red-500 p-2 rounded-sm'> Log Out </button>
   </nav>
 );
 
