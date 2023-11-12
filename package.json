@@ -2,6 +2,7 @@
   "scripts": {
     "dev": "bun run --hot src/index.tsx",
     "css": "bun run tailwindcss -i src/input.css -o src/static/styles.css --watch",
+    "debug": "bun --inspect src/index.tsx",
     "generate": "bun drizzle-kit generate:sqlite"
   },
   "dependencies": {

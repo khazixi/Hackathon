@@ -18,6 +18,11 @@ app.route('/preview', preview)
 app.route('/signup', signup)
 app.route('/login', login)
 
+app.onError((err, c) => {
+  console.error(`${err}`)
+  return c.text('Custom Error Message', 500)
+})
+
 app.get('/', async (c) => {
   const posts = await db.select().from(post)
   return c.html(

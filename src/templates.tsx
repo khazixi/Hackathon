@@ -46,10 +46,13 @@ export const PostContent = (props: Post) => (
 );
 
 export const Navbar = () => (
-  <nav class='mb-2'>
-    <ul class='list-none'>
-      <li class='ml-auto bg-white p-2 mr-2 rounded-sm w-20 text-center'> Sign In </li>
-    </ul>
+  <nav class='m-2 flex gap-2 w-fit'>
+    <a href='/login' class='bg-white p-2 mr-2 rounded-sm w-20 text-center'>
+      Log In
+    </a>
+    <a href='/signup' class='bg-white p-2 mr-2 rounded-sm w-20 text-center'>
+      Sign In
+    </a>
   </nav>
 );
 
@@ -57,9 +60,9 @@ type ErrorLoginProps = {
   reason: string
 }
 
-export const ErrorLogin = (props: ErrorLoginProps) => (
+export const ErrorLogin = (prop: string) => (
   <div class='bg-red-300'>
     <h1 class='text-red-700 font-bold'> There was an error </h1>
-    <h3 class='text-red-600 font-semibold'> Reason {props.reason} </h3>
+    <h3 class='text-red-600 font-semibold'> Reason {prop} </h3>
   </div>
 )
