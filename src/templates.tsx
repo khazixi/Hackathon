@@ -1,4 +1,6 @@
 import { FC } from 'hono/jsx'
+import { Post } from './schema'
+
 export const Layout: FC = (props) => (
   <html>
     <head>
@@ -13,4 +15,12 @@ export const Layout: FC = (props) => (
       </main>
     </body>
   </html>
+)
+
+export const Preview = (props: Post) => (
+  <div class='bg-white text-black p-4 m-4 rounded-lg' hx-get={`/content/${props.id}`}>
+    <h2 class='text-2xl'> {props.title} </h2>
+    <h3 class='text-lg text-gray-300'> By {props.author} </h3>
+    <p> {props.description} </p>
+  </div>
 )
