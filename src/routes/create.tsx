@@ -77,7 +77,7 @@ create.post('/', async (c) => {
       image: image,
     })
 
-  return c.text(
-    JSON.stringify('Thanks')
+  return c.html(
+    <a href='/'> Back </a>
   )
 })
