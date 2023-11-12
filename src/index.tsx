@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { db } from './db'
-import { Post, post } from './schema'
+import { post } from './schema'
 import { Layout, Preview } from './templates'
 import { create } from './routes/create'
 import { serveStatic } from 'hono/bun'
