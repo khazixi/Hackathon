@@ -16,8 +16,9 @@ export const post = sqliteTable('post', {
 
 // XXX: Add Name?
 export const user = sqliteTable("user", {
-	id: text("id").primaryKey()
+	id: text("id").primaryKey(),
 	// other user attributes
+  username: text("username")
 });
 
 export const session = sqliteTable("user_session", {

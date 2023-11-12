@@ -6,6 +6,8 @@ import { create } from './routes/create'
 import { serveStatic } from 'hono/bun'
 import { content } from './routes/content'
 import { preview } from './routes/preview'
+import { signup } from './routes/signup'
+import { login } from './routes/login'
 
 const app = new Hono()
 
@@ -13,6 +15,8 @@ app.get('/static/*', serveStatic({ root: './src' }))
 app.route('/create', create)
 app.route('/content', content)
 app.route('/preview', preview)
+app.route('/signup', signup)
+app.route('/login', login)
 
 app.get('/', async (c) => {
   const posts = await db.select().from(post)

@@ -52,3 +52,14 @@ export const Navbar = () => (
     </ul>
   </nav>
 );
+
+type ErrorLoginProps = {
+  reason: string
+}
+
+export const ErrorLogin = (props: ErrorLoginProps) => (
+  <div class='bg-red-300'>
+    <h1 class='text-red-700 font-bold'> There was an error </h1>
+    <h3 class='text-red-600 font-semibold'> Reason {props.reason} </h3>
+  </div>
+)

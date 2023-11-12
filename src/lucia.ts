@@ -5,15 +5,20 @@ import { sqlite } from "./db";
 
 // expect error (see next section)
 export const auth = lucia({
-	env: "DEV", // "PROD" if deployed to HTTPS
-	middleware: hono(),
+  env: "DEV", // "PROD" if deployed to HTTPS
+  middleware: hono(),
   adapter: libsql(
     sqlite, {
-      user: 'user',
-      session: 'user_session',
-      key: 'user_key'
-    }
-  )
+    user: 'user',
+    session: 'user_session',
+    key: 'user_key'
+  }
+  ),
+  getUserAttributes: (data) => {
+    return {
+      username: data.username
+    };
+  }
 });
 
 export type Auth = typeof auth;
