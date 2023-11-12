@@ -4,11 +4,13 @@ import { Post, post } from './schema'
 import { FC } from 'hono/jsx'
 import { create } from './routes/create'
 import { serveStatic } from 'hono/bun'
+import { content } from './routes/content'
 
 const app = new Hono()
 
 app.use('/static/*', serveStatic({ root: './' }))
 app.route('/create', create)
+app.route('/content', content)
 
 const Layout: FC = (props) => (
   <html>
@@ -47,5 +49,8 @@ app.get('/', async (c) => {
     </Layout>
   )
 })
+
+
+// TODO: Replace with an HX-BOOST?
 
 export default app
