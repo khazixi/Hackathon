@@ -16,7 +16,7 @@ app.route('/content', content)
 
 // TODO: Find out how to work with blobs and images
 const preview = (props: Post) => (
-  <div class='bg-white text-black p-4 m-4 rounded-lg' hx-get={`/content/${props.id}`}>
+  <div class='bg-white text-black p-4 m-4 rounded-lg min-w-[400px] max-w-[400px] min-h-[120px] slide-it' hx-get={`/content/${props.id}`} hx-swap="innerHTML transition:true">
     <h2 class='text-2xl'> {props.title} </h2>
     <h3 class='text-lg text-gray-300'> By {props.author} </h3>
     <p> {props.description} </p>
