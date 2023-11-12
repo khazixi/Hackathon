@@ -5,10 +5,13 @@
     "generate": "bun drizzle-kit generate:sqlite"
   },
   "dependencies": {
+    "@libsql/client": "^0.3.6",
+    "@lucia-auth/adapter-sqlite": "^2.0.1",
     "@lucia-auth/oauth": "^3.5.0",
     "drizzle-kit": "^0.20.1",
     "drizzle-orm": "^0.29.0",
-    "hono": "^3.9.2"
+    "hono": "^3.9.2",
+    "lucia": "^2.7.4"
   },
   "devDependencies": {
     "bun-types": "^1.0.7",
