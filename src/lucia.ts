@@ -1,4 +1,4 @@
-import { libsql } from "@lucia-auth/adapter-sqlite";
+import { betterSqlite3 } from "@lucia-auth/adapter-sqlite";
 import { lucia } from "lucia";
 import { hono } from "lucia/middleware";
 import { sqlite } from "./db";
@@ -7,7 +7,7 @@ import { sqlite } from "./db";
 export const auth = lucia({
   env: "DEV", // "PROD" if deployed to HTTPS
   middleware: hono(),
-  adapter: libsql(
+  adapter: betterSqlite3(
     sqlite, {
     user: 'user',
     session: 'user_session',

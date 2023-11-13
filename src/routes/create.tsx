@@ -63,13 +63,13 @@ create.post('/', async (c) => {
     )
   }
 
-  // let image
-  // if (data['image'] && typeof data['image'] == 'object') {
-  //   const temp = data['image'] as Blob
-  //   image = Buffer.from(await temp.arrayBuffer())
-  // } else {
-  //   image = null
-  // }
+  let image
+  if (data['image'] && typeof data['image'] == 'object') {
+    const temp = data['image'] as Blob
+    image = Buffer.from(await temp.arrayBuffer())
+  } else {
+    image = null
+  }
 
   await db.insert(post)
     .values({
@@ -80,7 +80,7 @@ create.post('/', async (c) => {
       author: session.user.username,
       city: data['city'] as string,
       state: data['state'] as string,
-      image: data['image'],
+      image: image,
     })
 
   return c.html(
